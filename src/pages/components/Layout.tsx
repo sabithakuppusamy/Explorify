@@ -8,9 +8,7 @@ import {
   HeaderContentContainer,
   HeaderTitle,
   LogoutText,
-  Sidebar,
 } from "../../../styles";
-import SidebarNavigation from "./SidebarNavigation";
 
 const Layout = (props: any) => {
   const isLoggedIn = !!props.token;

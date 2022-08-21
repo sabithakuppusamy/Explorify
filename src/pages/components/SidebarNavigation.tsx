@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { SidebarHeader, HeaderTitle, ExplorifyLogo } from "../../../styles";
+import {
+  SidebarHeader,
+  HeaderTitle,
+  ExplorifyLogo,
+  Sidebar,
+  ArtistListContainer,
+  SidebarContent,
+  SidebarHeading,
+  ArtistList,
+  ArtistImage,
+  ArtistName,
+} from "../../../styles";
 import { fetchArtistImage } from "../../../utils/api-helpers";
 
 const SidebarNavigation = ({
@@ -16,12 +27,9 @@ const SidebarNavigation = ({
   }, [recentPlayedTracks]);
 
   const getRecentlyPlayedTracksArtists = () => {
-    let artists: any[] = [];
     recentPlayedTracks.forEach((item: any) => {
       item.track.artists.forEach((artist: any) => {
-        if (!artists.includes(artist.name)) {
-          getImage(artist.id, artist.name);
-        }
+        getImage(artist.id, artist.name);
       });
     });
   };
@@ -43,7 +51,7 @@ const SidebarNavigation = ({
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <Sidebar>
       <SidebarHeader>
         <ExplorifyLogo
           width={70}
@@ -53,32 +61,30 @@ const SidebarNavigation = ({
         ></ExplorifyLogo>
         <HeaderTitle>Explorify</HeaderTitle>
       </SidebarHeader>
-      <div className="flex flex-col m-4 w-full">
-        <h1 className="mb-4">Your Top Artists</h1>
-        <div className="w-[95%] flex flex-row flex-wrap justify-between gap-4 h-[60vh] overflow-y-auto">
+      <SidebarContent>
+        <SidebarHeading>Your Top Artists</SidebarHeading>
+        <ArtistListContainer>
           {topArtists.map((item: any, index: number) => {
             return (
-              <div
-                className="w-full flex gap-2 items-center cursor-pointer hover:bg-[rgb(23,22,22)]"
+              <ArtistList
                 key={index}
                 onClick={() => {
                   handleArtistClick(item.name);
                 }}
               >
-                <img
+                <ArtistImage
                   alt="Placeholder"
-                  className="block rounded-lg"
                   width={50}
                   height={50}
                   src={item.image}
                 />
-                <span>{item.name}</span>
-              </div>
+                <ArtistName>{item.name}</ArtistName>
+              </ArtistList>
             );
           })}
-        </div>
-      </div>
-    </div>
+        </ArtistListContainer>
+      </SidebarContent>
+    </Sidebar>
   );
 };
 
