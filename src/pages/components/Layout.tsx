@@ -1,48 +1,48 @@
 import Head from "next/head";
 import React from "react";
 import Footer from "./Footer";
-import { useRouter } from "next/router";
+import {
+  ExplorifyLogo,
+  FlexColumn,
+  Header,
+  HeaderContentContainer,
+  HeaderTitle,
+  LogoutText,
+  Sidebar,
+} from "../../../styles";
+import SidebarNavigation from "./SidebarNavigation";
 
 const Layout = (props: any) => {
-  const router = useRouter();
-
+  const isLoggedIn = !!props.token;
   return (
-    <div className="layout">
+    <>
       <Head>
         <title>Explorify</title>
         <link
           rel="icon"
-          href="https://img.icons8.com/color/344/spotify--v3.png"
+          href="https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png"
         />
       </Head>
-      <div className="flex flex-col">
-        <div className="flex header fixed z-10 top-0 w-full">
-          <img
+      <FlexColumn>
+        <Header isLoggedIn={isLoggedIn}>
+          <ExplorifyLogo
             width={70}
             height={70}
-            className="p-4"
-            src="https://img.icons8.com/color/344/spotify--v3.png"
-          ></img>
-          <div className="flex flex-row justify-between w-full items-center mr-4">
-            <h2 className="text-center font-thin text-3xl text-white">
-              Explorify
-            </h2>
-            {router.pathname !== "/" && (
-              <h5
-                className="text-center font-thin text-sm text-white cursor-pointer hover:text-lg transition-all hover:font-light"
-                onClick={() => {
-                  router.push("/");
-                }}
-              >
-                Change User
-              </h5>
+            alt="spotify icon"
+            className="p-2"
+            src="https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png"
+          ></ExplorifyLogo>
+          <HeaderContentContainer>
+            <HeaderTitle>Explorify</HeaderTitle>
+            {isLoggedIn && (
+              <LogoutText onClick={props.handleLogout}>Logout</LogoutText>
             )}
-          </div>
-        </div>
+          </HeaderContentContainer>
+        </Header>
         {props.children}
-        <Footer />
-      </div>
-    </div>
+        <Footer isLoggedIn={isLoggedIn} />
+      </FlexColumn>
+    </>
   );
 };
 

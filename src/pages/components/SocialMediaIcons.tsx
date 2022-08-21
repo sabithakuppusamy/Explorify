@@ -7,10 +7,11 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconContainer } from "../../../styles";
 
 export const SocialMediaIcons = () => {
   return (
-    <div className="flex gap-2 mt-2 cursor-pointer">
+    <IconContainer>
       <FontAwesomeIcon
         icon={faTwitter}
         onClick={() => {
@@ -49,6 +50,6 @@ export const SocialMediaIcons = () => {
         icon={faEnvelope}
         className="text-white w-5"
       ></FontAwesomeIcon>
-    </div>
+    </IconContainer>
   );
 };
