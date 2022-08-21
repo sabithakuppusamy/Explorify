@@ -9,7 +9,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconContainer } from "../../../styles";
 
-export const SocialMediaIcons = () => {
+const SocialMediaIcons = () => {
   return (
     <IconContainer>
       <FontAwesomeIcon
@@ -53,3 +53,5 @@ export const SocialMediaIcons = () => {
     </IconContainer>
   );
 };
+
+export default SocialMediaIcons;

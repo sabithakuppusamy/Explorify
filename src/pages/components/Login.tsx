@@ -16,7 +16,7 @@ import {
   Wrapper,
 } from "../../../styles";
 
-export const Login = (props: any) => {
+const Login = (props: any) => {
   const LOGIN_LINK = `${AUTH_ENDPOINT}?response_type=token&client_id=${CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}&response_type=token&show_dialog=true`;
 
   return (
@@ -39,3 +39,5 @@ export const Login = (props: any) => {
     </Wrapper>
   );
 };
+
+export default Login;

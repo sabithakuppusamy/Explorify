@@ -1,6 +1,6 @@
 import React from "react";
 import { Foot, FooterContent, FooterContentContainer } from "../../../styles";
-import { SocialMediaIcons } from "./SocialMediaIcons";
+import SocialMediaIcons from "./SocialMediaIcons";
 
 const Footer = ({ isLoggedIn }: any) => {
   return (

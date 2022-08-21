@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import Layout from "./components/Layout";
-import { Login } from "./components/Login";
+import Login from "./components/Login";
 import HomePage from "./components/HomePage";
 
 const Home: NextPage = () => {
