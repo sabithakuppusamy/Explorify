@@ -7,8 +7,10 @@ import {
   Header,
   HeaderContentContainer,
   HeaderTitle,
-  LogoutText,
+  MainContentHeading,
 } from "../../../styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const Layout = (props: any) => {
   const isLoggedIn = !!props.token;
@@ -33,7 +35,14 @@ const Layout = (props: any) => {
           <HeaderContentContainer>
             <HeaderTitle>Explorify</HeaderTitle>
             {isLoggedIn && (
-              <LogoutText onClick={props.handleLogout}>Logout</LogoutText>
+              <>
+                <MainContentHeading>Recently Played Tracks</MainContentHeading>
+                <FontAwesomeIcon
+                  icon={faSignOut}
+                  onClick={props.handleLogout}
+                  className="text-white w-5 cursor-pointer mr-10"
+                ></FontAwesomeIcon>
+              </>
             )}
           </HeaderContentContainer>
         </Header>

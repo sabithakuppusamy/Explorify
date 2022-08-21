@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   FlexRowWrap,
   MainContentContainer,
-  MainContentHeading,
   TrackContainer,
   Wrapper,
 } from "../../../styles";
@@ -72,7 +71,6 @@ const HomePage = ({ token }: any) => {
         handleArtistClick={filterByArtist}
       />
       <MainContentContainer>
-        <MainContentHeading>Recently Played Tracks</MainContentHeading>
         {!!artistName && (
           <Filter handleRemove={handleRemoveFilter} artistName={artistName} />
         )}

@@ -17,8 +17,7 @@ export const Header = styled.div`
   ${BlackGradient};
   top: 0;
   opacity: 0.8;
-  background: ${(props: { isLoggedIn: boolean }) =>
-    props.isLoggedIn && `transparent`};
+  opacity: ${(props: { isLoggedIn: boolean }) => props.isLoggedIn && `1`};
 `;
 export const Sidebar = styled.div`
   ${BlackGradient};
@@ -119,13 +118,13 @@ export const ExplorifyLogo = tw.img``;
 
 export const MainContentContainer = tw.div`ml-72`;
 
-export const MainContentHeading = tw.div`mx-auto px-12 text-2xl ml-4 font-extralight`;
+export const MainContentHeading = tw.div`mx-auto px-12 text-2xl ml-32 font-extralight`;
 
-export const FilterTag = tw.div`ml-16 mt-4 inline-flex items-center gap-4 p-2 bg-black w-auto`;
+export const FilterTag = tw.div`ml-16 mt-16 inline-flex items-center gap-4 p-2 bg-black w-auto`;
 
 export const FilterName = tw.p`font-thin`;
 
-export const TrackContainer = tw.div`container my-12 mx-auto px-12 mb-20`;
+export const TrackContainer = tw.div`container mt-8 mx-auto px-12 mb-20`;
 
 export const FlexRowWrap = tw.div`flex flex-wrap flex-row`;
 
