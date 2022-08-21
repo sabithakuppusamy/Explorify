@@ -17,16 +17,16 @@ import {
 const TrackCardView = (props: any) => {
   const { trackDetails, isMobile } = props;
   return (
-    <TrackCard isMobile={isMobile} title={trackDetails.track.name}>
+    <TrackCard isMobile={isMobile} title={trackDetails?.track?.name}>
       <TrackCardArticle>
         <TrackImage
-          alt={trackDetails.track.name}
-          src={trackDetails.track.album.images[0].url}
+          alt={trackDetails?.track?.name}
+          src={trackDetails?.track?.album.images[0].url}
         />
         <TrackHeader>
           <TrackDetailContainer>
-            <TrackName title={trackDetails.track.name}>
-              {trackDetails.track.name}
+            <TrackName title={trackDetails?.track?.name}>
+              {trackDetails?.track?.name}
             </TrackName>
             <SpotifyImageContainer
               href="https://open.spotify.com/"
@@ -47,14 +47,16 @@ const TrackCardView = (props: any) => {
             <TrackArtistImage
               alt="Placeholder"
               width={"50vw"}
-              src={trackDetails.track.album.images[2].url}
+              src={trackDetails?.track?.album.images[2].url}
             />
             <TrackArtistName>
-              {trackDetails.track.artists.map((artist: any, idx: number) => {
+              {trackDetails?.track?.artists.map((artist: any, idx: number) => {
                 return (
                   <span key={idx}>
                     {artist.name}
-                    {idx + 1 !== trackDetails.track.artists.length ? ", " : ""}
+                    {idx + 1 !== trackDetails?.track?.artists.length
+                      ? ", "
+                      : ""}
                   </span>
                 );
               })}
