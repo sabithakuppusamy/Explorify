@@ -28,6 +28,7 @@ const Home: NextPage = () => {
   const handleLogout = () => {
     setToken("");
     window.localStorage.removeItem("token");
+    window.sessionStorage.removeItem("artist");
   };
 
   return (

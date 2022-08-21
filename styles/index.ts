@@ -3,19 +3,20 @@ import styled, { css } from "styled-components";
 import tw from "twin.macro";
 
 const BlackGradient = css`
-  background: linear-gradient(-45deg, #000, #575556, #000);
+  background: linear-gradient(-45deg, #000, rgb(25,25,25), #000);
   display: flex;
   position: fixed;
   z-index: 10;
   width: 100%;
   background-size: 400% 400%;
   color: white;
-  animation ${gradientAnimation} 35s ease alternate infinite;
+  animation ${gradientAnimation} 15s ease alternate infinite;
 `;
 
 export const Header = styled.div`
   ${BlackGradient};
   top: 0;
+  opacity: 0.8;
   background: ${(props: { isLoggedIn: boolean }) =>
     props.isLoggedIn && `transparent`};
 `;
@@ -35,8 +36,9 @@ export const Foot = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px;
+  opacity: ${(props: { isLoggedIn: boolean }) => !props.isLoggedIn && `0.8`};
   background: ${(props: { isLoggedIn: boolean }) =>
-    props.isLoggedIn && `linear-gradient(-45deg, #000,  rgb(24,24,24),#000)`};
+    props.isLoggedIn && `linear-gradient(-45deg, #000,rgb(24,24,24),#000)`};
 `;
 
 export const FormContainer = styled.div`
@@ -49,19 +51,20 @@ export const FormContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 50px 30px 20px 30px;
-  background: linear-gradient(45deg, #575556, #000);
-  animation: ${gradientAnimation} 20 ease alternate infinite;
-  background-size: 100% 100%;
+  background: linear-gradient(90deg, #000, rgb(25, 25, 25), #000);
+  animation: ${gradientAnimation} 15s ease alternate infinite;
+  background-size: 400% 400%;
   min-width: 40vw;
   height: auto;
   margin: auto;
-  opacity: 0.9;
+  opacity: 0.8;
   color: white;
 `;
 
 export const Wrapper: any = styled.div`
   color: white;
-  margin-top: 2.5rem;
+  margin-top: ${(props: { isLoggedIn: boolean }) =>
+    props.isLoggedIn && `2.5rem`};
 
   background-image: ${(props: { isLoggedIn: boolean }) =>
     !props.isLoggedIn &&
@@ -84,7 +87,8 @@ export const LogoutText = tw.h5`text-center font-thin text-sm cursor-pointer hov
 
 export const LoginContainer = tw.div`flex flex-col h-[100vh] justify-center align-middle`;
 
-export const LoginContent = tw.div`flex flex-row justify-center align-middle mx-auto my-0 gap-2`;
+export const LoginContent = tw.div`inline-flex flex-row justify-center align-middle mx-auto my-0
+ gap-2 p-2 bg-black rounded-sm shadow-md hover:bg-[#575556] cursor-pointer`;
 
 export const LoginWithSpotify = tw.img`m-auto`;
 
@@ -92,7 +96,7 @@ export const LoginHeading = tw.p`text-2xl font-thin`;
 
 export const LoginDescription = tw.p`text-sm font-thin`;
 
-export const LoginText = tw.a`text-left font-thin text-sm mt-1`;
+export const LoginText = tw.a`text-left font-normal text-sm mt-1`;
 
 export const SidebarHeader = tw.div`flex flex-row h-[70px] w-full items-center gap-4 m-4`;
 

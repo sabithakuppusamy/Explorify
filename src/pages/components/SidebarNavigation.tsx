@@ -20,21 +20,26 @@ const SidebarNavigation = ({
     recentPlayedTracks.forEach((item: any) => {
       item.track.artists.forEach((artist: any) => {
         if (!artists.includes(artist.name)) {
-          let artistObject = {
-            image: getImage(artist.id),
-            name: artist.name,
-          };
-          artists.push(artistObject);
+          getImage(artist.id, artist.name);
         }
       });
     });
-    setTopArtists(artists);
   };
 
-  const getImage = (id: string) => {
-    let data = fetchArtistImage(token, id);
-    //console.log(data.images[0].url);
-    return "https://i.scdn.co/image/ab6761610000e5eb53defb703e917e62b55ee8ed";
+  const getImage = (id: string, name: string) => {
+    fetchArtistImage(token, id).then((data: any) => {
+      let artistObject = {
+        name: name,
+        image: data.images[0].url,
+      };
+      setTopArtists((oldData: any) => {
+        let artistList = [...oldData, artistObject];
+        return artistList.filter(
+          (v, i, a) =>
+            a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
+        );
+      });
+    });
   };
 
   return (

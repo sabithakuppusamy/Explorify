@@ -64,13 +64,15 @@ const HomePage = ({ token }: any) => {
       </Sidebar>
 
       <div className="ml-72">
-        <h1 className="mx-auto px-12">Recently Played Tracks</h1>
+        <h1 className="mx-auto px-12 text-2xl ml-4 font-extralight">
+          Recently Played Tracks
+        </h1>
         {!!artistName && (
-          <div className="ml-12 mt-4 inline-flex items-center gap-4 p-2 bg-black w-auto">
-            <p>{artistName}</p>
+          <div className="ml-16 mt-4 inline-flex items-center gap-4 p-2 bg-black w-auto">
+            <p className="font-thin">{artistName}</p>
             <FontAwesomeIcon
               onClick={() => {
-                window.sessionStorage.setItem("artist", "");
+                window.sessionStorage.removeItem("artist");
                 setArtistName("");
               }}
               icon={faClose}
@@ -78,40 +80,51 @@ const HomePage = ({ token }: any) => {
             ></FontAwesomeIcon>
           </div>
         )}
-        <div className="container my-12 mx-auto px-12">
+        <div className="container my-12 mx-auto px-12 mb-20">
           <div className="flex flex-wrap flex-row">
             {filteredTrackList.map((item: any, index: number) => {
               return (
                 <div
                   key={index}
-                  className=" w-1/3 my-4 px-4 sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4"
+                  className=" w-1/3 my-4 px-4 sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 cursor-default"
+                  title={item.track.name}
                 >
                   <article className="overflow-hidden rounded-lg shadow-lg bg-[rgb(14,14,14)]">
-                    <a href="#">
+                    <div>
                       <img
                         alt="Placeholder"
                         className="block h-auto w-full"
                         src={item.track.album.images[0].url}
                       />
-                    </a>
+                    </div>
 
                     <header className="flex items-center justify-between leading-tight p-2 md:p-4">
-                      <h1 className="text-lg">
-                        <a
-                          className="no-underline hover:underline text-white"
-                          href="#"
+                      <h1 className="text-lg w-[95%] flex justify-between gap-2">
+                        <p
+                          className=" cursor-default no-underline hover:underline text-white whitespace-nowrap overflow-hidden text-ellipsis block"
+                          title={item.track.name}
                         >
                           {item.track.name}
+                        </p>
+                        <a
+                          href="https://open.spotify.com/"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          <img
+                            src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png"
+                            alt="spotify"
+                            width={30}
+                            height={30}
+                            className="cursor-pointer"
+                            title="Listen it on spotify"
+                          />
                         </a>
                       </h1>
-                      <p className="text-grey-darker text-sm">11/1/19</p>
                     </header>
 
-                    <footer className="flex items-center justify-between leading-none p-2 md:p-4">
-                      <a
-                        className="flex items-center no-underline hover:underline text-white"
-                        href="#"
-                      >
+                    <footer className="flex items-center justify-between p-2 md:p-4">
+                      <p className="flex items-center no-underline hover:underline text-white">
                         <img
                           alt="Placeholder"
                           className="block rounded-full"
@@ -119,12 +132,21 @@ const HomePage = ({ token }: any) => {
                           height={50}
                           src={item.track.album.images[2].url}
                         />
-                        <p className="ml-2 text-sm">
-                          {item.track.artists.map((artist: any) => {
-                            return <span key={artist.name}>{artist.name}</span>;
-                          })}
+                        <p className="ml-2 text-sm cursor-default">
+                          {item.track.artists.map(
+                            (artist: any, index: number) => {
+                              return (
+                                <span key={index}>
+                                  {artist.name}
+                                  {index + 1 !== item.track.artists.length
+                                    ? ", "
+                                    : ""}
+                                </span>
+                              );
+                            }
+                          )}
                         </p>
-                      </a>
+                      </p>
                     </footer>
                   </article>
                 </div>
