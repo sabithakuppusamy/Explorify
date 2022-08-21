@@ -75,7 +75,7 @@ export const Wrapper: any = styled.div`
 export const HeaderTitle = styled.h2`
   text-align: center;
   font-weight: 300;
-  font-size: 5vw;
+  font-size: 2.5vw;
   user-select: none;
   background: -webkit-linear-gradient(
     -45deg,
@@ -123,7 +123,7 @@ export const LoginContent = tw.div`inline-flex flex-row justify-center align-mid
 
 export const LoginWithSpotify = tw.img`m-auto`;
 
-export const LoginHeading = tw.p`text-[5vw] font-thin`;
+export const LoginHeading = tw.p`text-[2.5vw] font-thin`;
 
 export const LoginDescription = tw.p`text-sm font-thin`;
 

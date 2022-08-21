@@ -42,9 +42,10 @@ const Layout = (props: any) => {
         <Header isLoggedIn={isLoggedIn}>
           {!isLoggedIn && (
             <ExplorifyLogo
-              width={"70vw"}
+              width={"50vw"}
+              height={"60vw"}
               alt="spotify icon"
-              className="p-[2vw]"
+              className="m-[2vw]"
               src="https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png"
             ></ExplorifyLogo>
           )}

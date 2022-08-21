@@ -56,6 +56,7 @@ const SidebarNavigation = ({
       <SidebarHeader>
         <ExplorifyLogo
           width={"60vw"}
+          height={"60vw"}
           alt="spotify icon"
           src="https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png"
         ></ExplorifyLogo>
