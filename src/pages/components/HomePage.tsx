@@ -1,14 +1,11 @@
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Sidebar, Wrapper } from "../../../styles";
-import {
-  fetchRecentlyPlayedTracks,
-  fetchSearchedArtist,
-} from "../../../utils/api-helpers";
+import { fetchRecentlyPlayedTracks } from "../../../utils/api-helpers";
 import SidebarNavigation from "./SidebarNavigation";
 
 const HomePage = ({ token }: any) => {
-  const [searchKey, setSearchKey] = useState("");
-  const [artists, setArtists] = useState<any[]>([]);
   const [playlist, setPlaylist] = useState<any[]>([]);
   const [filteredTrackList, setFilterTrackList] = useState<any[]>([]);
   const [artistName, setArtistName] = useState<string | null>(null);
@@ -17,7 +14,7 @@ const HomePage = ({ token }: any) => {
     if (token) {
       getRecentlyPlayedTracks();
     }
-  }, []);
+  }, [artistName]);
 
   const getRecentlyPlayedTracks = async () => {
     const recentlyPlayedSongsList = await fetchRecentlyPlayedTracks(token);
@@ -33,11 +30,18 @@ const HomePage = ({ token }: any) => {
         songs.push(uniqueList);
       });
     setPlaylist(songs);
-    setFilterTrackList(songs);
+
+    if (window.sessionStorage.getItem("artist")) {
+      let artist = window.sessionStorage.getItem("artist") || "";
+      filterByArtist(artist);
+    } else {
+      setFilterTrackList(songs);
+    }
   };
 
   const filterByArtist = (name: string) => {
     setArtistName(name);
+    window.sessionStorage.setItem("artist", name);
     let filteredTracks: any[] = [];
     playlist.forEach((eachList: any) => {
       eachList.track.artists.forEach((eachListArtist: any) => {
@@ -61,7 +65,19 @@ const HomePage = ({ token }: any) => {
 
       <div className="ml-72">
         <h1 className="mx-auto px-12">Recently Played Tracks</h1>
-        <p>Artist: {artistName}</p>
+        {!!artistName && (
+          <div className="ml-12 mt-4 inline-flex items-center gap-4 p-2 bg-black w-auto">
+            <p>{artistName}</p>
+            <FontAwesomeIcon
+              onClick={() => {
+                window.sessionStorage.setItem("artist", "");
+                setArtistName("");
+              }}
+              icon={faClose}
+              className="text-white w-2 cursor-pointer mt-1"
+            ></FontAwesomeIcon>
+          </div>
+        )}
         <div className="container my-12 mx-auto px-12">
           <div className="flex flex-wrap flex-row">
             {filteredTrackList.map((item: any, index: number) => {
