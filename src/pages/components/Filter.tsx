@@ -13,7 +13,7 @@ const Filter = (props: any) => {
           handleRemove();
         }}
         icon={faClose}
-        className="text-white w-2 cursor-pointer mt-1"
+        className="text-white w-[0.8vw] cursor-pointer mt-[0.3vh]"
       ></FontAwesomeIcon>
     </FilterTag>
   );

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   FlexRowWrap,
   MainContentContainer,
+  MainContentHeading,
+  MainContentSideHeading,
   TrackContainer,
   Wrapper,
 } from "../../../styles";
@@ -14,12 +16,20 @@ const HomePage = ({ token }: any) => {
   const [playlist, setPlaylist] = useState<any[]>([]);
   const [filteredTrackList, setFilterTrackList] = useState<any[]>([]);
   const [artistName, setArtistName] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (token) {
       getRecentlyPlayedTracks();
     }
   }, [artistName]);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      console.log(window.innerHeight, window.innerWidth);
+      setIsMobile(window.innerWidth < 650);
+    });
+  }, []);
 
   const getRecentlyPlayedTracks = async () => {
     const recentlyPlayedSongsList = await fetchRecentlyPlayedTracks(token);
@@ -69,15 +79,25 @@ const HomePage = ({ token }: any) => {
         recentPlayedTracks={playlist}
         token={token}
         handleArtistClick={filterByArtist}
+        isMobile={isMobile}
       />
       <MainContentContainer>
+        <MainContentSideHeading isMobile={isMobile}>
+          Recently Played Tracks
+        </MainContentSideHeading>
         {!!artistName && (
           <Filter handleRemove={handleRemoveFilter} artistName={artistName} />
         )}
         <TrackContainer>
           <FlexRowWrap>
             {filteredTrackList.map((item: any, index: number) => {
-              return <TrackCardView key={index} trackDetails={item} />;
+              return (
+                <TrackCardView
+                  key={index}
+                  trackDetails={item}
+                  isMobile={isMobile}
+                />
+              );
             })}
           </FlexRowWrap>
         </TrackContainer>

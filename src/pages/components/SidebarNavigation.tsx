@@ -17,6 +17,7 @@ const SidebarNavigation = ({
   recentPlayedTracks,
   token,
   handleArtistClick,
+  isMobile,
 }: any) => {
   const [topArtists, setTopArtists] = useState<any>([]);
 
@@ -54,12 +55,11 @@ const SidebarNavigation = ({
     <Sidebar>
       <SidebarHeader>
         <ExplorifyLogo
-          width={70}
-          height={70}
+          width={"60vw"}
           alt="spotify icon"
           src="https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png"
         ></ExplorifyLogo>
-        <HeaderTitle>Explorify</HeaderTitle>
+        {!isMobile && <HeaderTitle>Explorify</HeaderTitle>}
       </SidebarHeader>
       <SidebarContent>
         <SidebarHeading>Your Top Artists</SidebarHeading>
@@ -67,6 +67,7 @@ const SidebarNavigation = ({
           {topArtists.map((item: any, index: number) => {
             return (
               <ArtistList
+                isMobile={isMobile}
                 key={index}
                 onClick={() => {
                   handleArtistClick(item.name);
@@ -78,7 +79,7 @@ const SidebarNavigation = ({
                   height={50}
                   src={item.image}
                 />
-                <ArtistName>{item.name}</ArtistName>
+                {!isMobile && <ArtistName>{item.name}</ArtistName>}
               </ArtistList>
             );
           })}

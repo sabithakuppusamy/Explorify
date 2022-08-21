@@ -1,4 +1,4 @@
-import { gradientAnimation } from "./animation";
+import { gradientAnimation, gradientTextAnimation } from "./animation";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
 
@@ -24,7 +24,7 @@ export const Sidebar = styled.div`
   top: 0;
   min-height: 100vh;
   overflow-y: auto;
-  width: 20%;
+  width: 25vw;
   background: #000;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@ export const Foot = styled.div`
   min-height: 6vh;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 1vw;
   opacity: ${(props: { isLoggedIn: boolean }) => !props.isLoggedIn && `0.8`};
   background: ${(props: { isLoggedIn: boolean }) =>
     props.isLoggedIn && `linear-gradient(-45deg, #000,rgb(24,24,24),#000)`};
@@ -72,17 +72,46 @@ export const Wrapper: any = styled.div`
     `url('https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80')`};
 `;
 
+export const HeaderTitle = styled.h2`
+  text-align: center;
+  font-weight: 300;
+  font-size: 5vw;
+  user-select: none;
+  background: -webkit-linear-gradient(
+    -45deg,
+    rgb(248, 93, 111),
+    rgb(55, 156, 254),
+    rgb(248, 93, 111)
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ${gradientTextAnimation} 8s ease-in-out alternate infinite;
+`;
+
+export const WelcomeText = styled.span`
+  background: -webkit-linear-gradient(
+    -45deg,
+    rgb(248, 93, 111),
+    rgb(55, 156, 254),
+    rgb(248, 93, 111)
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 400;
+  animation: ${gradientTextAnimation} 8s ease-in-out alternate infinite;
+`;
+
 export const FlexColumn = tw.div`flex flex-col`;
 
 export const HeaderContentContainer = tw.div`flex flex-row justify-between w-full items-center mr-4`;
 
-export const HeaderTitle = tw.h2`text-center font-thin text-3xl`;
-
 export const FooterContentContainer = tw.div`flex flex-col items-center justify-center`;
 
-export const FooterContent = tw.div`flex items-center justify-center gap-2 text-center font-thin`;
+export const FooterContent = tw.div`flex items-center justify-center gap-2 text-center font-thin text-[0.8vw]`;
 
-export const IconContainer = tw.div`flex gap-2 cursor-pointer`;
+export const IconContainer = tw.div`flex gap-[1vw] mt-[1vh] cursor-pointer`;
 
 export const LogoutText = tw.h5`text-center font-thin text-sm cursor-pointer hover:text-lg 
 transition-all hover:font-light`;
@@ -90,11 +119,11 @@ transition-all hover:font-light`;
 export const LoginContainer = tw.div`flex flex-col h-[100vh] justify-center align-middle`;
 
 export const LoginContent = tw.div`inline-flex flex-row justify-center align-middle mx-auto my-0
- gap-2 p-2 bg-black rounded-sm shadow-md hover:bg-[#575556] cursor-pointer`;
+ gap-2 p-2 bg-black rounded-sm shadow-md hover:bg-[rgb(35,35,35)] cursor-pointer`;
 
 export const LoginWithSpotify = tw.img`m-auto`;
 
-export const LoginHeading = tw.p`text-2xl font-thin`;
+export const LoginHeading = tw.p`text-[5vw] font-thin`;
 
 export const LoginDescription = tw.p`text-sm font-thin`;
 
@@ -104,51 +133,62 @@ export const SidebarHeader = tw.div`flex flex-row h-[70px] w-full items-center g
 
 export const SidebarContent = tw.div`flex flex-col m-4 w-full`;
 
-export const SidebarHeading = tw.div`mb-4 font-extralight text-2xl`;
+export const SidebarHeading = tw.div`mb-4 font-semibold text-[1.5vw]`;
 
-export const ArtistListContainer = tw.div`w-[95%] flex flex-row flex-wrap justify-between gap-4 h-[60vh] overflow-y-auto`;
+export const ArtistListContainer = tw.div`w-[23vw] flex flex-row flex-wrap justify-between gap-4 h-[60vh] overflow-y-auto mr-8`;
 
-export const ArtistList = tw.div`w-full flex gap-2 items-center cursor-pointer hover:bg-[rgb(23,22,22)]`;
+export const ArtistList = styled.div`
+  ${tw`w-full flex gap-[2vw] items-center cursor-pointer hover:bg-[rgb(23,22,22)]`};
+  width: ${(props: { isMobile: boolean }) => props.isMobile && `auto`};
+`;
 
 export const ArtistImage = tw.img`block rounded-lg`;
 
-export const ArtistName = tw.span`font-normal`;
+export const ArtistName = tw.span`font-thin text-[1.2vw]`;
 
-export const ExplorifyLogo = tw.img``;
+export const ExplorifyLogo = tw.img`user-select[none]`;
 
-export const MainContentContainer = tw.div`ml-72`;
+export const MainContentContainer = tw.div`ml-[25vw]`;
 
-export const MainContentHeading = tw.div`mx-auto px-12 text-2xl ml-32 font-extralight`;
+export const MainContentHeading = tw.div`h-[auto] p-[1vw] m-auto px-[4vw] text-[1.9vw] ml-[25vw] font-extralight`;
 
-export const FilterTag = tw.div`ml-16 mt-16 inline-flex items-center gap-4 p-2 bg-black w-auto`;
+export const MainContentSideHeading = styled(MainContentHeading)`
+  ${tw`m-0 text-[1.5vw]`};
+  margin-top: ${(props: { isMobile: boolean }) => !props.isMobile && `4vh`};
+`;
 
-export const FilterName = tw.p`font-thin`;
+export const FilterTag = tw.div`ml-[4vw] inline-flex items-center gap-x-[1vw] p-[0.5vw] bg-black w-auto`;
 
-export const TrackContainer = tw.div`container mt-8 mx-auto px-12 mb-20`;
+export const FilterName = tw.p`font-thin text-[1.2vw]`;
+
+export const TrackContainer = tw.div`container mx-auto px-[2vw] mt-[1vh] mb-[15vh]`;
 
 export const FlexRowWrap = tw.div`flex flex-wrap flex-row`;
 
-export const TrackCard = tw.div`w-1/3 my-4 px-4 sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4 cursor-default`;
+export const TrackCard = styled.div`
+  ${tw`w-1/3 my-4 px-4 cursor-default`};
+  width: ${(props: { isMobile: boolean }) => props.isMobile && `100%`};
+`;
 
-export const TrackCardArticle = tw.article`overflow-hidden rounded-lg shadow-lg bg-[rgb(14,14,14)]`;
+export const TrackCardArticle = tw.article`overflow-hidden rounded-lg shadow-lg bg-[rgb(10,10,10)]`;
 
 export const TrackImage = tw.img`block h-auto w-full`;
 
-export const TrackHeader = tw.header`flex items-center justify-between leading-tight p-2 md:p-4`;
+export const TrackHeader = tw.header`flex items-center justify-between p-[1vw] pb-0`;
 
-export const TrackDetailContainer = tw.div`text-lg w-[95%] flex justify-between gap-2`;
+export const TrackDetailContainer = tw.div`text-[1.3vw] w-[100%] flex justify-between gap-[1vw]`;
 
-export const TrackName = tw.p`cursor-default no-underline hover:underline text-white 
+export const TrackName = tw.p`cursor-default w-[80%] no-underline hover:underline text-white 
 whitespace-nowrap overflow-hidden overflow-ellipsis block`;
 
 export const SpotifyImageContainer = tw.a``;
 
 export const SpotifyImage = tw.img`cursor-pointer`;
 
-export const TrackArtistFooter = tw.footer`flex items-center justify-between p-2 md:p-4`;
+export const TrackArtistFooter = tw.footer`flex items-center justify-between p-[1vw]`;
 
-export const TrackArtistContainer = tw.div`flex items-center no-underline hover:underline text-white`;
+export const TrackArtistContainer = tw.div`flex items-center font-thin no-underline hover:underline text-white text-[0.8vw]`;
 
 export const TrackArtistImage = tw.img`block rounded-full`;
 
-export const TrackArtistName = tw.p`ml-2 text-sm cursor-default`;
+export const TrackArtistName = tw.p`ml-2 text-[0.8vw] cursor-default`;

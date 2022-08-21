@@ -17,14 +17,14 @@ const SocialMediaIcons = () => {
         onClick={() => {
           window.open("https://twitter.com/sabi95oct", "_blank");
         }}
-        className="text-white w-5"
+        className="text-white  w-[1.2vw]"
       ></FontAwesomeIcon>
       <FontAwesomeIcon
         onClick={() => {
           window.open("https://codepen.io/sabitha_kuppusamy", "_blank");
         }}
         icon={faCodepen}
-        className="text-white w-5"
+        className="text-white  w-[1.2vw]"
       ></FontAwesomeIcon>
       <FontAwesomeIcon
         onClick={() => {
@@ -34,21 +34,21 @@ const SocialMediaIcons = () => {
           );
         }}
         icon={faLinkedin}
-        className="text-white w-5"
+        className="text-white  w-[1.2vw]"
       ></FontAwesomeIcon>
       <FontAwesomeIcon
         icon={faGithub}
         onClick={() => {
           window.open("https://github.com/sabithakuppusamy", "_blank");
         }}
-        className="text-white w-5"
+        className="text-white  w-[1.2vw]"
       ></FontAwesomeIcon>
       <FontAwesomeIcon
         onClick={() => {
           location.href = "mailto:sabi95oct@gmail.com";
         }}
         icon={faEnvelope}
-        className="text-white w-5"
+        className="text-white w-[1.2vw]"
       ></FontAwesomeIcon>
     </IconContainer>
   );

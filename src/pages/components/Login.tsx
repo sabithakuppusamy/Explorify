@@ -13,6 +13,7 @@ import {
   LoginHeading,
   LoginText,
   LoginWithSpotify,
+  WelcomeText,
   Wrapper,
 } from "../../../styles";
 
@@ -23,7 +24,9 @@ const Login = (props: any) => {
     <Wrapper isLoggedIn={!!props.token}>
       <LoginContainer>
         <FormContainer>
-          <LoginHeading>Welcome to Explorify!</LoginHeading>
+          <LoginHeading>
+            Welcome to <WelcomeText>Explorify!</WelcomeText>
+          </LoginHeading>
           <LoginDescription>Explore your music taste.</LoginDescription>
           <LoginContent>
             <LoginWithSpotify

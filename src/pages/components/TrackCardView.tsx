@@ -15,9 +15,9 @@ import {
 } from "../../../styles";
 
 const TrackCardView = (props: any) => {
-  const { trackDetails } = props;
+  const { trackDetails, isMobile } = props;
   return (
-    <TrackCard title={trackDetails.track.name}>
+    <TrackCard isMobile={isMobile} title={trackDetails.track.name}>
       <TrackCardArticle>
         <TrackImage
           alt={trackDetails.track.name}
@@ -36,8 +36,7 @@ const TrackCardView = (props: any) => {
               <SpotifyImage
                 src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png"
                 alt="spotify"
-                width={30}
-                height={30}
+                width={"30vw"}
                 title="Listen it on spotify"
               />
             </SpotifyImageContainer>
@@ -47,8 +46,7 @@ const TrackCardView = (props: any) => {
           <TrackArtistContainer>
             <TrackArtistImage
               alt="Placeholder"
-              width={50}
-              height={50}
+              width={"50vw"}
               src={trackDetails.track.album.images[2].url}
             />
             <TrackArtistName>
