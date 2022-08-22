@@ -24,7 +24,7 @@ const TrackCardView = (props: any) => {
           src={trackDetails?.track?.album.images[0].url}
         />
         <TrackHeader>
-          <TrackDetailContainer>
+          <TrackDetailContainer isMobile={isMobile}>
             <TrackName title={trackDetails?.track?.name}>
               {trackDetails?.track?.name}
             </TrackName>
@@ -49,7 +49,7 @@ const TrackCardView = (props: any) => {
               width={"50vw"}
               src={trackDetails?.track?.album.images[2].url}
             />
-            <TrackArtistName>
+            <TrackArtistName isMobile={isMobile}>
               {trackDetails?.track?.artists.map((artist: any, idx: number) => {
                 return (
                   <span key={idx}>

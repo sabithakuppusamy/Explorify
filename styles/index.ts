@@ -17,6 +17,7 @@ export const Header = styled.div`
   ${BlackGradient};
   top: 0;
   opacity: 0.8;
+  min-height: 6vh;
   opacity: ${(props: { isLoggedIn: boolean }) => props.isLoggedIn && `1`};
 `;
 export const Sidebar = styled.div`
@@ -64,12 +65,14 @@ export const FormContainer = styled.div`
 
 export const Wrapper: any = styled.div`
   color: white;
+  min-height: 95vh;
   margin-top: ${(props: { isLoggedIn: boolean }) =>
     props.isLoggedIn && `2.5rem`};
 
-  background-image: ${(props: { isLoggedIn: boolean }) =>
-    !props.isLoggedIn &&
-    `url('https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80')`};
+  background: ${(props: { isLoggedIn: boolean }) =>
+    props.isLoggedIn
+      ? `linear-gradient(180deg, #000, rgb(35, 35, 35), #000)`
+      : `url('https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80')`};
 `;
 
 export const HeaderTitle = styled.h2`
@@ -109,7 +112,11 @@ export const HeaderContentContainer = tw.div`flex flex-row justify-between w-ful
 
 export const FooterContentContainer = tw.div`flex flex-col items-center justify-center`;
 
-export const FooterContent = tw.div`flex items-center justify-center gap-2 text-center font-thin text-[0.8vw]`;
+export const FooterContent = styled.div`
+  ${tw`flex items-center justify-center gap-2 text-center font-thin`};
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `2vw` : `0.8vw`};
+`;
 
 export const IconContainer = tw.div`flex gap-[1vw] mt-[1vh] cursor-pointer`;
 
@@ -133,9 +140,13 @@ export const SidebarHeader = tw.div`flex flex-row h-[70px] w-full items-center g
 
 export const SidebarContent = tw.div`flex flex-col m-4 w-full`;
 
-export const SidebarHeading = tw.div`mb-4 font-semibold text-[1.5vw]`;
+export const SidebarHeading = styled.div`
+  ${tw`mb-[2vh] font-semibold`};
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `2.5vw` : `1.5vw`};
+`;
 
-export const ArtistListContainer = tw.div`w-[23vw] flex flex-row flex-wrap justify-between gap-4 h-[60vh] overflow-y-auto mr-8`;
+export const ArtistListContainer = tw.div`w-[23vw] flex flex-row flex-wrap justify-between gap-4 h-[75vh] overflow-y-auto mr-8 pb-[15vh]`;
 
 export const ArtistList = styled.div`
   ${tw`w-full flex gap-[2vw] items-center cursor-pointer hover:bg-[rgb(23,22,22)]`};
@@ -150,16 +161,30 @@ export const ExplorifyLogo = tw.img`user-select[none]`;
 
 export const MainContentContainer = tw.div`ml-[25vw]`;
 
-export const MainContentHeading = tw.div`h-[auto] p-[1vw] m-auto px-[4vw] text-[1.9vw] ml-[25vw] font-extralight`;
-
-export const MainContentSideHeading = styled(MainContentHeading)`
-  ${tw`m-0 text-[1.5vw]`};
-  margin-top: ${(props: { isMobile: boolean }) => !props.isMobile && `4vh`};
+export const MainContentHeading = styled.div`
+  ${tw`h-[auto] p-[1vw] m-auto px-[4vw] ml-[25vw] font-extralight`};
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `4vw` : `2vw`};
 `;
 
-export const FilterTag = tw.div`ml-[4vw] inline-flex items-center gap-x-[1vw] p-[0.5vw] bg-black w-auto`;
+export const MainContentSideHeading = styled(MainContentHeading)`
+  ${tw`m-0`};
+  margin-top: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `2vh` : "4vh"};
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `3vw` : `1.5vw`};
+`;
 
-export const FilterName = tw.p`font-thin text-[1.2vw]`;
+export const FilterTag = styled.div`
+  ${tw`ml-[4vw] inline-flex items-center gap-x-[1vw] p-[0.5vw] bg-black w-auto`};
+  margin-top: ${(props: { isMobile: boolean }) => props.isMobile && `2vh`};
+`;
+
+export const FilterName = styled.div`
+  ${tw`font-thin`};
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `3vw` : `1.2vw`};
+`;
 
 export const TrackContainer = tw.div`container mx-auto px-[2vw] mt-[1vh] mb-[15vh]`;
 
@@ -176,7 +201,12 @@ export const TrackImage = tw.img`block h-auto w-full`;
 
 export const TrackHeader = tw.header`flex items-center justify-between p-[1vw] pb-0`;
 
-export const TrackDetailContainer = tw.div`text-[1.3vw] w-[100%] flex justify-between gap-[1vw]`;
+export const TrackDetailContainer = styled.div`
+  ${tw`w-[100%] flex justify-between gap-[1vw]`};
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `4vw` : `1.3vw`};
+  margin-top: ${(props: { isMobile: boolean }) => props.isMobile && `1vh`};
+`;
 
 export const TrackName = tw.p`cursor-default w-[80%] no-underline hover:underline text-white 
 whitespace-nowrap overflow-hidden overflow-ellipsis block`;
@@ -191,4 +221,8 @@ export const TrackArtistContainer = tw.div`flex items-center font-thin no-underl
 
 export const TrackArtistImage = tw.img`block rounded-full`;
 
-export const TrackArtistName = tw.p`ml-2 text-[0.8vw] cursor-default`;
+export const TrackArtistName = styled.p`
+  ${tw`ml-2 cursor-default`};
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `2.5vw` : `0.8vw`};
+`;

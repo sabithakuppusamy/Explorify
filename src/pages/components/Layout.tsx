@@ -15,6 +15,7 @@ import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const Layout = (props: any) => {
   const isLoggedIn = !!props.token;
+
   const [greetingsText, setGreetingsText] = useState("Good Day!");
   useEffect(() => {
     const today = new Date();
@@ -53,20 +54,24 @@ const Layout = (props: any) => {
             {!isLoggedIn && <HeaderTitle>Explorify</HeaderTitle>}
             {isLoggedIn && (
               <>
-                <MainContentHeading>
+                <MainContentHeading isMobile={props.isMobile}>
                   Hello, <WelcomeText>{greetingsText}</WelcomeText>
                 </MainContentHeading>
                 <FontAwesomeIcon
                   icon={faSignOut}
                   onClick={props.handleLogout}
-                  className="text-white w-[1.5vw] cursor-pointer mr-[3vw] hover:w-[1.8vw]"
+                  className={`text-white ${
+                    props.isMobile
+                      ? "w-[4vw] hover:w-[2.3vw]"
+                      : "w-[1.5vw] hover:w-[1.8vw]"
+                  } cursor-pointer mr-[3vw]`}
                 ></FontAwesomeIcon>
               </>
             )}
           </HeaderContentContainer>
         </Header>
         {props.children}
-        <Footer isLoggedIn={isLoggedIn} />
+        <Footer isLoggedIn={isLoggedIn} isMobile={props.isMobile} />
       </FlexColumn>
     </>
   );

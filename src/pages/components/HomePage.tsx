@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   FlexRowWrap,
   MainContentContainer,
-  MainContentHeading,
   MainContentSideHeading,
   TrackContainer,
   Wrapper,
@@ -10,13 +9,14 @@ import {
 import { fetchRecentlyPlayedTracks } from "../../../utils/api-helpers";
 import Filter from "./Filter";
 import SidebarNavigation from "./SidebarNavigation";
+import SpinnerLoading from "./SpinnerLoading";
 import TrackCardView from "./TrackCardView";
 
-const HomePage = ({ token }: any) => {
+const HomePage = ({ token, isMobile }: any) => {
   const [playlist, setPlaylist] = useState<any[]>([]);
   const [filteredTrackList, setFilterTrackList] = useState<any[]>([]);
   const [artistName, setArtistName] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -24,14 +24,8 @@ const HomePage = ({ token }: any) => {
     }
   }, [artistName]);
 
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      console.log(window.innerHeight, window.innerWidth);
-      setIsMobile(window.innerWidth < 650);
-    });
-  }, []);
-
   const getRecentlyPlayedTracks = async () => {
+    setIsLoading(true);
     const recentlyPlayedSongsList = await fetchRecentlyPlayedTracks(token);
     let songs: any[] = [];
     recentlyPlayedSongsList.items
@@ -52,6 +46,9 @@ const HomePage = ({ token }: any) => {
     } else {
       setFilterTrackList(songs);
     }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   };
 
   const filterByArtist = (name: string) => {
@@ -74,35 +71,42 @@ const HomePage = ({ token }: any) => {
   };
 
   return (
-    <Wrapper isLoggedIn={!!token}>
-      <SidebarNavigation
-        recentPlayedTracks={playlist}
-        token={token}
-        handleArtistClick={filterByArtist}
-        isMobile={isMobile}
-      />
-      <MainContentContainer>
-        <MainContentSideHeading isMobile={isMobile}>
-          Recently Played Tracks
-        </MainContentSideHeading>
-        {!!artistName && (
-          <Filter handleRemove={handleRemoveFilter} artistName={artistName} />
-        )}
-        <TrackContainer>
-          <FlexRowWrap>
-            {filteredTrackList.map((item: any, index: number) => {
-              return (
-                <TrackCardView
-                  key={index}
-                  trackDetails={item}
-                  isMobile={isMobile}
-                />
-              );
-            })}
-          </FlexRowWrap>
-        </TrackContainer>
-      </MainContentContainer>
-    </Wrapper>
+    <>
+      {isLoading && <SpinnerLoading />}
+      <Wrapper isLoggedIn={!!token}>
+        <SidebarNavigation
+          recentPlayedTracks={playlist}
+          token={token}
+          handleArtistClick={filterByArtist}
+          isMobile={isMobile}
+        />
+        <MainContentContainer>
+          <MainContentSideHeading isMobile={isMobile}>
+            Recently Played Tracks
+          </MainContentSideHeading>
+          {!!artistName && (
+            <Filter
+              handleRemove={handleRemoveFilter}
+              artistName={artistName}
+              isMobile={isMobile}
+            />
+          )}
+          <TrackContainer>
+            <FlexRowWrap>
+              {filteredTrackList.map((item: any, index: number) => {
+                return (
+                  <TrackCardView
+                    key={index}
+                    trackDetails={item}
+                    isMobile={isMobile}
+                  />
+                );
+              })}
+            </FlexRowWrap>
+          </TrackContainer>
+        </MainContentContainer>
+      </Wrapper>
+    </>
   );
 };
 

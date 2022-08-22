@@ -2,11 +2,13 @@ import React from "react";
 import { Foot, FooterContent, FooterContentContainer } from "../../../styles";
 import SocialMediaIcons from "./SocialMediaIcons";
 
-const Footer = ({ isLoggedIn }: any) => {
+const Footer = ({ isLoggedIn, isMobile }: any) => {
   return (
     <Foot isLoggedIn={isLoggedIn}>
       <FooterContentContainer>
-        <FooterContent>Developed by Sabitha Kuppusamy</FooterContent>
+        <FooterContent isMobile={isMobile}>
+          Developed by Sabitha Kuppusamy
+        </FooterContent>
         <SocialMediaIcons />
       </FooterContentContainer>
     </Foot>

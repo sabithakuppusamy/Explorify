@@ -63,7 +63,7 @@ const SidebarNavigation = ({
         {!isMobile && <HeaderTitle>Explorify</HeaderTitle>}
       </SidebarHeader>
       <SidebarContent>
-        <SidebarHeading>Your Top Artists</SidebarHeading>
+        <SidebarHeading isMobile={isMobile}>Your Top Artists</SidebarHeading>
         <ArtistListContainer>
           {topArtists.map((item: any, index: number) => {
             return (

@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 
 const Home: NextPage = () => {
   const [token, setToken] = useState<string | null>("");
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -25,6 +26,12 @@ const Home: NextPage = () => {
     setToken(storageToken);
   }, [token]);
 
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setIsMobile(window.innerWidth < 650);
+    });
+  }, []);
+
   const handleLogout = () => {
     setToken("");
     window.localStorage.removeItem("token");
@@ -32,8 +39,12 @@ const Home: NextPage = () => {
   };
 
   return (
-    <Layout token={token} handleLogout={handleLogout}>
-      {!token ? <Login token={token} /> : <HomePage token={token} />}
+    <Layout token={token} handleLogout={handleLogout} isMobile={isMobile}>
+      {!token ? (
+        <Login token={token} isMobile={isMobile} />
+      ) : (
+        <HomePage token={token} isMobile={isMobile} />
+      )}
     </Layout>
   );
 };
