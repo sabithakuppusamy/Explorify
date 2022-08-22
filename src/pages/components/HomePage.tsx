@@ -43,6 +43,16 @@ const HomePage = ({ token, isMobile }: any) => {
             songs.push(uniqueList);
           });
         setPlaylist(songs);
+
+        if (window.sessionStorage.getItem("artist")) {
+          let artist = window.sessionStorage.getItem("artist") || "";
+          filterByArtist(artist);
+        } else {
+          setFilterTrackList(songs);
+        }
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       })
       .catch((_err: any) => {
         setIsLoading(false);
@@ -50,16 +60,6 @@ const HomePage = ({ token, isMobile }: any) => {
           "Something Went wrong! Please check whether your admin provide you access dashboard!"
         );
       });
-
-    if (window.sessionStorage.getItem("artist")) {
-      let artist = window.sessionStorage.getItem("artist") || "";
-      filterByArtist(artist);
-    } else {
-      setFilterTrackList(songs);
-    }
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
   };
 
   const filterByArtist = (name: string) => {
