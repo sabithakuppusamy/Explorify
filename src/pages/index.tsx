@@ -27,10 +27,13 @@ const Home: NextPage = () => {
   }, [token]);
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      setIsMobile(window.innerWidth < 650);
-    });
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 650);
+  };
 
   const handleLogout = () => {
     setToken("");
@@ -43,7 +46,11 @@ const Home: NextPage = () => {
       {!token ? (
         <Login token={token} isMobile={isMobile} />
       ) : (
-        <HomePage token={token} isMobile={isMobile} />
+        <HomePage
+          token={token}
+          isMobile={isMobile}
+          handleLogout={handleLogout}
+        />
       )}
     </Layout>
   );

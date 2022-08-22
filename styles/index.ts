@@ -213,7 +213,12 @@ export const TrackCardArticle = tw.article`overflow-hidden rounded-lg shadow-lg 
 
 export const TrackImage = tw.img`block h-auto w-full`;
 
-export const TrackHeader = tw.header`flex items-center justify-between p-[1vw] pb-0`;
+export const TrackHeader = styled.header`
+  padding: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `3vw` : `1vw`};
+  ${tw`flex items-center justify-between pb-0`};
+`;
+tw.header`flex items-center justify-between p-[1vw] pb-0`;
 
 export const TrackDetailContainer = styled.div`
   ${tw`w-[100%] flex justify-between gap-[1vw]`};
@@ -222,14 +227,18 @@ export const TrackDetailContainer = styled.div`
   margin-top: ${(props: { isMobile: boolean }) => props.isMobile && `1vh`};
 `;
 
-export const TrackName = tw.p`cursor-default w-[80%] no-underline hover:underline text-white 
+export const TrackName = tw.div`cursor-default w-[80%] no-underline hover:underline text-white 
 whitespace-nowrap overflow-hidden overflow-ellipsis block`;
 
 export const SpotifyImageContainer = tw.a``;
 
 export const SpotifyImage = tw.img`cursor-pointer`;
 
-export const TrackArtistFooter = tw.footer`flex items-center justify-between p-[1vw]`;
+export const TrackArtistFooter = styled.footer`
+  ${tw`flex items-center justify-between p-[1vw]`};
+  margin-bottom: ${(props: { isMobile: boolean }) => props.isMobile && "2vh"};
+  margin-left: ${(props: { isMobile: boolean }) => props.isMobile && "1vh"};
+`;
 
 export const TrackArtistContainer = tw.div`flex items-center font-thin no-underline hover:underline text-white text-[0.8vw]`;
 

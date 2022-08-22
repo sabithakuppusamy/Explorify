@@ -9,7 +9,7 @@ const Footer = ({ isLoggedIn, isMobile }: any) => {
         <FooterContent isMobile={isMobile}>
           Developed by Sabitha Kuppusamy
         </FooterContent>
-        <SocialMediaIcons />
+        <SocialMediaIcons isMobile={isMobile} />
       </FooterContentContainer>
     </Foot>
   );

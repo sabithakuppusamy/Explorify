@@ -23,7 +23,7 @@ const TrackCardView = (props: any) => {
           alt={trackDetails?.track?.name}
           src={trackDetails?.track?.album.images[0].url}
         />
-        <TrackHeader>
+        <TrackHeader isMobile={isMobile}>
           <TrackDetailContainer isMobile={isMobile}>
             <TrackName title={trackDetails?.track?.name}>
               {trackDetails?.track?.name}
@@ -42,7 +42,7 @@ const TrackCardView = (props: any) => {
             </SpotifyImageContainer>
           </TrackDetailContainer>
         </TrackHeader>
-        <TrackArtistFooter>
+        <TrackArtistFooter isMobile={isMobile}>
           <TrackArtistContainer>
             <TrackArtistImage
               alt="Placeholder"

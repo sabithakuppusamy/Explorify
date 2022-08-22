@@ -15,7 +15,7 @@ import SidebarNavigation from "./SidebarNavigation";
 import SpinnerLoading from "./SpinnerLoading";
 import TrackCardView from "./TrackCardView";
 
-const HomePage = ({ token, isMobile }: any) => {
+const HomePage = ({ token, isMobile, handleLogout }: any) => {
   const [playlist, setPlaylist] = useState<any[]>([]);
   const [filteredTrackList, setFilterTrackList] = useState<any[]>([]);
   const [artistName, setArtistName] = useState<string | null>(null);
@@ -24,6 +24,8 @@ const HomePage = ({ token, isMobile }: any) => {
   useEffect(() => {
     if (token) {
       getRecentlyPlayedTracks();
+      window.scrollTo(window.scrollX, window.scrollY - 1);
+      window.scrollTo(window.scrollX, window.scrollY + 1);
     }
   }, [artistName]);
 
@@ -56,8 +58,9 @@ const HomePage = ({ token, isMobile }: any) => {
       })
       .catch((_err: any) => {
         setIsLoading(false);
+        handleLogout();
         alert(
-          "Something Went wrong! Please check whether your admin provide you access dashboard!"
+          "Oops! You don't have access. Please login with different account"
         );
       });
   };
