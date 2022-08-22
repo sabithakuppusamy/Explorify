@@ -29,6 +29,7 @@ const HomePage = ({ token, isMobile }: any) => {
 
   const getRecentlyPlayedTracks = async () => {
     setIsLoading(true);
+    let songs: any[] = [];
     fetchRecentlyPlayedTracks(token)
       .then((data: any) => {
         data.items
