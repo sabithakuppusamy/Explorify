@@ -45,7 +45,7 @@ const Layout = (props: any) => {
             <ExplorifyLogo
               width={"50vw"}
               alt="spotify icon"
-              className="m-[2vw]"
+              className="m-[1vw]"
               src="https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png"
             ></ExplorifyLogo>
           )}

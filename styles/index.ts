@@ -86,7 +86,7 @@ export const HeaderTitle = styled.div`
   text-align: center;
   font-weight: 300;
   font-size: ${(props: { isMobile: boolean }) =>
-    props.isMobile ? `6vw` : `2.5vw`};
+    props.isMobile ? `6vw` : `2vw`};
   user-select: none;
   background: -webkit-linear-gradient(
     -45deg,
@@ -141,8 +141,9 @@ export const LoginWithSpotify = tw.img`m-auto`;
 export const LoginHeading = styled.div`
   ${tw`font-thin`};
   font-size: ${(props: { isMobile: boolean }) =>
-    props.isMobile ? `6vw` : `2.5vw`};
-  margin-bottom: ${(props: { isMobile: boolean }) => props.isMobile && `2vh`};
+    props.isMobile ? `6vw` : `1.5vw`};
+  margin-bottom: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `2vh` : `1vh`};
 `;
 
 export const LoginDescription = tw.p`text-sm font-thin`;
