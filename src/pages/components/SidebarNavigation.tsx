@@ -60,30 +60,37 @@ const SidebarNavigation = ({
           alt="spotify icon"
           src="https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png"
         ></ExplorifyLogo>
-        {!isMobile && <HeaderTitle>Explorify</HeaderTitle>}
+        {!isMobile && <HeaderTitle isMobile={isMobile}>Explorify</HeaderTitle>}
       </SidebarHeader>
       <SidebarContent>
         <SidebarHeading isMobile={isMobile}>Your Top Artists</SidebarHeading>
         <ArtistListContainer>
-          {topArtists.map((item: any, index: number) => {
-            return (
-              <ArtistList
-                isMobile={isMobile}
-                key={index}
-                onClick={() => {
-                  handleArtistClick(item.name);
-                }}
-              >
-                <ArtistImage
-                  alt="Placeholder"
-                  width={50}
-                  height={50}
-                  src={item.image}
-                />
-                {!isMobile && <ArtistName>{item.name}</ArtistName>}
-              </ArtistList>
-            );
-          })}
+          {topArtists.length > 0 ? (
+            topArtists.map((item: any, index: number) => {
+              return (
+                <ArtistList
+                  isMobile={isMobile}
+                  key={index}
+                  onClick={() => {
+                    handleArtistClick(item.name);
+                  }}
+                >
+                  <ArtistImage
+                    alt="Placeholder"
+                    width={50}
+                    height={50}
+                    src={item.image}
+                  />
+                  {!isMobile && <ArtistName>{item.name}</ArtistName>}
+                </ArtistList>
+              );
+            })
+          ) : (
+            <p className="font-normal text-[1vw]">
+              {" "}
+              There is no recently played tracks by you.
+            </p>
+          )}
         </ArtistListContainer>
       </SidebarContent>
     </Sidebar>

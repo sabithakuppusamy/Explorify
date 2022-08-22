@@ -47,20 +47,27 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: no-wrap;
-  row-gap: 20px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 50px 30px 20px 30px;
   background: linear-gradient(90deg, #000, rgb(25, 25, 25), #000);
   animation: ${gradientAnimation} 15s ease alternate infinite;
   background-size: 400% 400%;
-  min-width: 40vw;
   height: auto;
   margin: auto;
   opacity: 0.8;
   color: white;
+  padding: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `4vw` : `2vw`};
+  min-width: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `70vw` : `45vw`};
+`;
+
+export const NoDataContainer = styled.div`
+  ${tw`flex flex-col items-center justify-center h-auto w-[30vw] p-[2vw] mx-auto mt-[10vh]`};
+  background: linear-gradient(90deg, #000, rgb(25, 25, 25), #000);
+  animation: ${gradientAnimation} 15s ease alternate infinite;
 `;
 
 export const Wrapper: any = styled.div`
@@ -75,10 +82,11 @@ export const Wrapper: any = styled.div`
       : `url('https://images.unsplash.com/photo-1487180144351-b8472da7d491?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80')`};
 `;
 
-export const HeaderTitle = styled.h2`
+export const HeaderTitle = styled.div`
   text-align: center;
   font-weight: 300;
-  font-size: 2.5vw;
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `6vw` : `2.5vw`};
   user-select: none;
   background: -webkit-linear-gradient(
     -45deg,
@@ -130,7 +138,12 @@ export const LoginContent = tw.div`inline-flex flex-row justify-center align-mid
 
 export const LoginWithSpotify = tw.img`m-auto`;
 
-export const LoginHeading = tw.p`text-[2.5vw] font-thin`;
+export const LoginHeading = styled.div`
+  ${tw`font-thin`};
+  font-size: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? `6vw` : `2.5vw`};
+  margin-bottom: ${(props: { isMobile: boolean }) => props.isMobile && `2vh`};
+`;
 
 export const LoginDescription = tw.p`text-sm font-thin`;
 
@@ -170,7 +183,7 @@ export const MainContentHeading = styled.div`
 export const MainContentSideHeading = styled(MainContentHeading)`
   ${tw`m-0`};
   margin-top: ${(props: { isMobile: boolean }) =>
-    props.isMobile ? `2vh` : "4vh"};
+    props.isMobile ? `2vh` : "8vh"};
   font-size: ${(props: { isMobile: boolean }) =>
     props.isMobile ? `3vw` : `1.5vw`};
 `;

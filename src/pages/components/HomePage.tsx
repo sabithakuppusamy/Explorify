@@ -3,8 +3,11 @@ import {
   FlexRowWrap,
   MainContentContainer,
   MainContentSideHeading,
+  SpotifyImage,
   TrackContainer,
+  NoDataContainer,
   Wrapper,
+  SpotifyImageContainer,
 } from "../../../styles";
 import { fetchRecentlyPlayedTracks } from "../../../utils/api-helpers";
 import Filter from "./Filter";
@@ -26,19 +29,26 @@ const HomePage = ({ token, isMobile }: any) => {
 
   const getRecentlyPlayedTracks = async () => {
     setIsLoading(true);
-    const recentlyPlayedSongsList = await fetchRecentlyPlayedTracks(token);
-    let songs: any[] = [];
-    recentlyPlayedSongsList.items
-      .filter((value: any, index: number, self: any) => {
-        return (
-          self.findIndex((v: any) => v.track.name === value.track.name) ===
-          index
-        );
+    fetchRecentlyPlayedTracks(token)
+      .then((data: any) => {
+        data.items
+          .filter((value: any, index: number, self: any) => {
+            return (
+              self.findIndex((v: any) => v.track.name === value.track.name) ===
+              index
+            );
+          })
+          .map((uniqueList: any) => {
+            songs.push(uniqueList);
+          });
+        setPlaylist(songs);
       })
-      .map((uniqueList: any) => {
-        songs.push(uniqueList);
+      .catch((_err: any) => {
+        setIsLoading(false);
+        alert(
+          "Something Went wrong! Please check whether your admin provide you access dashboard!"
+        );
       });
-    setPlaylist(songs);
 
     if (window.sessionStorage.getItem("artist")) {
       let artist = window.sessionStorage.getItem("artist") || "";
@@ -92,17 +102,41 @@ const HomePage = ({ token, isMobile }: any) => {
             />
           )}
           <TrackContainer>
-            <FlexRowWrap>
-              {filteredTrackList.map((item: any, index: number) => {
-                return (
-                  <TrackCardView
-                    key={index}
-                    trackDetails={item}
-                    isMobile={isMobile}
+            {filteredTrackList.length > 0 ? (
+              <FlexRowWrap>
+                {filteredTrackList.map((item: any, index: number) => {
+                  return (
+                    <TrackCardView
+                      key={index}
+                      trackDetails={item}
+                      isMobile={isMobile}
+                    />
+                  );
+                })}
+              </FlexRowWrap>
+            ) : (
+              <NoDataContainer>
+                <div className="font-thin text-[2vw] mb-[4vh]">
+                  Oops! No track found
+                </div>
+                <div className="font-normal text-[1vw] text-center mb-[2vh]">
+                  You should listen more songs to keep yourself calm!
+                  <p>Listen it on spotify, now!</p>
+                </div>
+                <SpotifyImageContainer
+                  href="https://open.spotify.com/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <SpotifyImage
+                    src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png"
+                    alt="spotify"
+                    width={"50vw"}
+                    title="Listen it on spotify"
                   />
-                );
-              })}
-            </FlexRowWrap>
+                </SpotifyImageContainer>
+              </NoDataContainer>
+            )}
           </TrackContainer>
         </MainContentContainer>
       </Wrapper>

@@ -23,8 +23,8 @@ const Login = (props: any) => {
   return (
     <Wrapper isLoggedIn={!!props.token}>
       <LoginContainer>
-        <FormContainer>
-          <LoginHeading>
+        <FormContainer isMobile={props.isMobile}>
+          <LoginHeading isMobile={props.isMobile}>
             Welcome to <WelcomeText>Explorify!</WelcomeText>
           </LoginHeading>
           <LoginDescription>Explore your music taste.</LoginDescription>

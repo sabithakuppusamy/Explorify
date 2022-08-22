@@ -44,14 +44,15 @@ const Layout = (props: any) => {
           {!isLoggedIn && (
             <ExplorifyLogo
               width={"50vw"}
-              height={"60vw"}
               alt="spotify icon"
               className="m-[2vw]"
               src="https://www.freepnglogos.com/uploads/apple-music-logo-circle-png-28.png"
             ></ExplorifyLogo>
           )}
           <HeaderContentContainer>
-            {!isLoggedIn && <HeaderTitle>Explorify</HeaderTitle>}
+            {!isLoggedIn && (
+              <HeaderTitle isMobile={props.isMobile}>Explorify</HeaderTitle>
+            )}
             {isLoggedIn && (
               <>
                 <MainContentHeading isMobile={props.isMobile}>
